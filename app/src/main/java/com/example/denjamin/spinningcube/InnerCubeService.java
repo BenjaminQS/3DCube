@@ -21,10 +21,7 @@ public class InnerCubeService extends Service {
     private boolean isConnected = false;
     private int currIndex;
     private int totalSteps = 0;
-    String packingData = "Hi";
-
-
-
+    String packingData = null;
 
     ICubeInterface.Stub binder = new ICubeInterface.Stub(){
 
@@ -81,9 +78,6 @@ public class InnerCubeService extends Service {
         return new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
     }
 
-
-
-
     class GetBoxLoadThread extends Thread {
         @Override
         public void run() {
@@ -92,7 +86,7 @@ public class InnerCubeService extends Service {
             while (threadExecute) {
                 try {
                     if (packingData == null || !packingData.equals(packingDataTemp)) {
-                        packingData = getPackingData("http://localhost:8080/ServletJson0120/ServletJson0120/JsonTest");
+                        packingData = getPackingData("http://10.207.199.72:8080/ServletJson0120/ServletJson0120/JsonTest");
                     }
 
 //                    if (packingData != null) {
@@ -105,19 +99,19 @@ public class InnerCubeService extends Service {
 //
 //                            System.out.println("jsonArray.length:" + jsonArray.length());
 //                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                int[] cubeData = new int[9];
+//                                int[] cubeStringData = new int[9];
 //                                JSONObject jObject = jsonArray.getJSONObject(i);
-//                                cubeData[0] = jObject.getInt("w");
-//                                cubeData[1] = jObject.getInt("h");
-//                                cubeData[2] = jObject.getInt("d");
+//                                cubeStringData[0] = jObject.getInt("w");
+//                                cubeStringData[1] = jObject.getInt("h");
+//                                cubeStringData[2] = jObject.getInt("d");
 //                                JSONObject coordJObject = jObject.getJSONObject("coordinates");
-//                                cubeData[3] = (coordJObject.getInt("x1"));
-//                                cubeData[4] = (coordJObject.getInt("y1"));
-//                                cubeData[5] = (coordJObject.getInt("z1"));
-//                                cubeData[6] = (coordJObject.getInt("x2"));
-//                                cubeData[7] = (coordJObject.getInt("y2"));
-//                                cubeData[8] = (coordJObject.getInt("z2"));
-//                                cubeList.add(cubeData);
+//                                cubeStringData[3] = (coordJObject.getInt("x1"));
+//                                cubeStringData[4] = (coordJObject.getInt("y1"));
+//                                cubeStringData[5] = (coordJObject.getInt("z1"));
+//                                cubeStringData[6] = (coordJObject.getInt("x2"));
+//                                cubeStringData[7] = (coordJObject.getInt("y2"));
+//                                cubeStringData[8] = (coordJObject.getInt("z2"));
+//                                cubeList.add(cubeStringData);
 //                                totalSteps = i;
 //                            }
 //                        }

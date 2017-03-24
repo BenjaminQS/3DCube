@@ -5,26 +5,32 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
-import com.example.denjamin.spinningcube.CubeActivity;
 
 
 public class InnerCube  {
+
 
     private FloatBuffer mVertexBuffer;
     private FloatBuffer mColorBuffer;
     private ByteBuffer  mIndexBuffer;
 
+//    public InnerCube(FloatBuffer mVertexBuffer, FloatBuffer mColorBuffer,ByteBuffer  mIndexBuffer ){
+//        this.mVertexBuffer = mVertexBuffer;
+//        this.mColorBuffer = mColorBuffer;
+//        this.mIndexBuffer = mIndexBuffer;
+//    }
 
-    private float vertices[] = {
-            -0.5f, -0.5f, -0.5f,
-            0.5f, -0.5f, -0.5f,
-            0.5f,  0.5f, -0.5f,
-            -0.5f, 0.5f, -0.5f,
-            -0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f,  0.5f,
-            0.5f,  0.5f,  0.5f,
-            -0.5f,  0.5f,  0.5f
-    };
+
+//    private float vertices[] = {
+//            -0.5f, -0.5f, -0.5f,
+//            0.5f, -0.5f, -0.5f,
+//            0.5f,  0.5f, -0.5f,
+//            -0.5f, 0.5f, -0.5f,
+//            -0.5f, -0.5f,  0.5f,
+//            0.5f, -0.5f,  0.5f,
+//            0.5f,  0.5f,  0.5f,
+//            -0.5f,  0.5f,  0.5f
+//    };
     private float colors[] = {
             1.0f,  0.0f,  0.0f,  0.0f,
             1.0f,  0.0f,  0.0f,  0.0f,
@@ -43,27 +49,27 @@ public class InnerCube  {
             3, 7, 4, 3, 4, 0,
             4, 7, 6, 4, 6, 5,
             3, 0, 1, 3, 1, 2
-
-
-
     };
 
-    public InnerCube() {
-        ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
-        byteBuf.order(ByteOrder.nativeOrder());
-        mVertexBuffer = byteBuf.asFloatBuffer();
-        mVertexBuffer.put(vertices);
-        mVertexBuffer.position(0);
+    public InnerCube(FloatBuffer mVertexBuffer) {
+//        ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
+//        byteBuf.order(ByteOrder.nativeOrder());
+//        mVertexBuffer = byteBuf.asFloatBuffer();
+//        mVertexBuffer.put(vertices);
+        this.mVertexBuffer = mVertexBuffer;
+        this.mVertexBuffer.position(0);
 
-        byteBuf = ByteBuffer.allocateDirect(colors.length * 4);
+        ByteBuffer byteBuf = ByteBuffer.allocateDirect(colors.length * 4);
         byteBuf.order(ByteOrder.nativeOrder());
         mColorBuffer = byteBuf.asFloatBuffer();
         mColorBuffer.put(colors);
-        mColorBuffer.position(0);
+//        this.mColorBuffer = mColorBuffer;
+        this.mColorBuffer.position(0);
 
         mIndexBuffer = ByteBuffer.allocateDirect(indices.length);
         mIndexBuffer.put(indices);
-        mIndexBuffer.position(0);
+//        this.mIndexBuffer = mIndexBuffer;
+        this.mIndexBuffer.position(0);
     }
 
     public void draw(GL10 gl) {

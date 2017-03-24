@@ -11,6 +11,7 @@ public class OuterCube {
 	private FloatBuffer mVertexBuffer;
 	private FloatBuffer mColorBuffer;
 	private ByteBuffer  mIndexBuffer;
+	private final float multi = 3.0f;
 
 	private float vertices[] = {
 //			-1.0f, -1.0f, -1.0f,
