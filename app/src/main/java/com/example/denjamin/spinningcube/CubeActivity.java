@@ -36,16 +36,13 @@ public class CubeActivity extends Activity {
     private final  float coreY = 0.3125f;
     private final  float coreZ = 0.21875f;
     private final  float baseNum = 128f;
-    private final  int hIndex = 0;
-    private final  int wIndex = 1;
-    private final  int dIndex = 2;
     private final  int x1Index = 3;
     private final  int y1Index = 4;
     private final  int z1Index = 5;
     private final  int x2Index = 6;
     private final  int y2Index = 7;
     private final  int z2Index = 8;
-    private int cubeIndex = 0;
+    private int cubeIndex = 1;
 
 
 
@@ -81,23 +78,23 @@ public class CubeActivity extends Activity {
         v0Z = ((cubeDataList.get(index)[z1Index]/baseNum)-coreZ)*multi;
 
         v1X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
-        v1Y = ((cubeDataList.get(index)[y2Index]-cubeDataList.get(index)[hIndex])/baseNum - coreY)*multi;
-        v1Z = ((cubeDataList.get(index)[z2Index]- cubeDataList.get(index)[dIndex])/baseNum - coreZ)*multi;
+        v1Y = ((cubeDataList.get(index)[y1Index])/baseNum - coreY)*multi;
+        v1Z = ((cubeDataList.get(index)[z1Index])/baseNum - coreZ)*multi;
 
         v2X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
         v2Y = ((cubeDataList.get(index)[y2Index])/baseNum - coreY)*multi;
-        v2Z = ((cubeDataList.get(index)[z2Index]- cubeDataList.get(index)[dIndex])/baseNum - coreZ)*multi;
+        v2Z = ((cubeDataList.get(index)[z1Index])/baseNum - coreZ)*multi;
 
         v3X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
-        v3Y = ((cubeDataList.get(index)[y1Index] + cubeDataList.get(index)[hIndex])/baseNum-coreY)*multi;
+        v3Y = ((cubeDataList.get(index)[y2Index])/baseNum-coreY)*multi;
         v3Z = ((cubeDataList.get(index)[z1Index]/baseNum)-coreZ)*multi;
 
         v4X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
         v4Y = ((cubeDataList.get(index)[y1Index] )/baseNum-coreY)*multi;
-        v4Z = ((cubeDataList.get(index)[z1Index] +  cubeDataList.get(index)[dIndex])/baseNum-coreZ)*multi;
+        v4Z = ((cubeDataList.get(index)[z2Index] )/baseNum-coreZ)*multi;
 
         v5X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
-        v5Y = ((cubeDataList.get(index)[y2Index]-cubeDataList.get(index)[hIndex])/baseNum - coreY)*multi;
+        v5Y = ((cubeDataList.get(index)[y1Index])/baseNum - coreY)*multi;
         v5Z = (cubeDataList.get(index)[z2Index]/baseNum - coreZ)*multi;
 
         v6X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
@@ -105,8 +102,8 @@ public class CubeActivity extends Activity {
         v6Z = (cubeDataList.get(index)[z2Index]/baseNum - coreZ)*multi;
 
         v7X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
-        v7Y = ((cubeDataList.get(index)[y1Index] +  cubeDataList.get(index)[hIndex])/baseNum-coreY)*multi;
-        v7Z = ((cubeDataList.get(index)[z1Index] +  cubeDataList.get(index)[dIndex])/baseNum-coreZ)*multi;
+        v7Y = ((cubeDataList.get(index)[y2Index])/baseNum-coreY)*multi;
+        v7Z = ((cubeDataList.get(index)[z2Index])/baseNum-coreZ)*multi;
 
         float vertices[] = {
                 v0X, v0Y, v0Z,
