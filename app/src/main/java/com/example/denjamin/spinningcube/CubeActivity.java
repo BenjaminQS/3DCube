@@ -9,10 +9,13 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -184,36 +187,77 @@ public class CubeActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        GLSurfaceView view = new GLSurfaceView(this);
+//        GLSurfaceView view = new GLSurfaceView(this);
         try {
             setCubeDataList();
-            setVerticles(cubeIndex);
+//            setVerticles(cubeIndex);
         }catch (Exception e){
             e.printStackTrace();
         }
-        view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-        setContentView(view);
+//        view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
+//        setContentView(view);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.open_gldemo, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.open_gldemo, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.next:
+//                cubeIndex ++;
+//                return true;
+//            case R.id.prev:
+//                cubeIndex--;
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
+
+
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.next:
-                cubeIndex ++;
-                return true;
-            case R.id.prev:
-                cubeIndex--;
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        GLSurfaceView view = new GLSurfaceView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);;
+        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+        int keyCode = event.getKeyCode();
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && cubeIndex < cubeDataList.size() -1) {
+            cubeIndex ++;
+//            GLSurfaceView view = new GLSurfaceView(this);
+//            for(int i = 0; i < cubeIndex; i++) {
+                try {
+//                setCubeDataList();
+                    setVerticles(cubeIndex);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
+
+//                setContentView(view);
+
+                addContentView(view,params);
+//            }
+//            return true;
         }
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && cubeIndex > 0) {
+            cubeIndex --;
+//            GLSurfaceView view = new GLSurfaceView(this);
+            try {
+//                setCubeDataList();
+                setVerticles(cubeIndex);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
+            addContentView(view,params);
+//            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
-
 }
