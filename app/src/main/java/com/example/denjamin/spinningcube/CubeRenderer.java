@@ -51,6 +51,7 @@ public class CubeRenderer implements GLSurfaceView.Renderer {
         gl.glTranslatef(0.0f, 0.0f, -10.0f);
         gl.glRotatef(mCubeRotation, 0.0f, 1.0f, 0.0f);
         mCube.draw(gl);
+
         innerCube.draw(gl);
         gl.glLoadIdentity();
         mCubeRotation -= 0.15f;

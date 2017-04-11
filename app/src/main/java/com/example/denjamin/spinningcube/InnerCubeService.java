@@ -86,7 +86,7 @@ public class InnerCubeService extends Service {
             while (threadExecute) {
                 try {
                     if (packingData == null || !packingData.equals(packingDataTemp)) {
-                        packingData = getPackingData("http://localhost:8080/ServletJson0120/ServletJson0120/JsonTest");
+                        packingData = getPackingData("http://192.168.0.104:8080/ServletJson0120/ServletJson0120/JsonTest");
                     }
 
 //                    if (packingData != null) {
