@@ -54,6 +54,7 @@ public class CubeRenderer implements GLSurfaceView.Renderer {
 
         innerCube.draw(gl);
         gl.glLoadIdentity();
+        //gl.
         mCubeRotation -= 0.15f;
     }
 
@@ -64,9 +65,7 @@ public class CubeRenderer implements GLSurfaceView.Renderer {
         gl.glLoadIdentity();
         GLU.gluPerspective(gl, 45.0f, (float)width / (float)height, 0.1f, 100.0f);
         gl.glViewport(0, 0, width, height);
-
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
-
 }

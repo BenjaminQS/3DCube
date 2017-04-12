@@ -9,11 +9,13 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,16 +39,13 @@ public class CubeActivity extends Activity {
     private final  float coreY = 0.3125f;
     private final  float coreZ = 0.21875f;
     private final  float baseNum = 128f;
-    private final  int hIndex = 0;
-    private final  int wIndex = 1;
-    private final  int dIndex = 2;
     private final  int x1Index = 3;
     private final  int y1Index = 4;
     private final  int z1Index = 5;
     private final  int x2Index = 6;
     private final  int y2Index = 7;
     private final  int z2Index = 8;
-    private int cubeIndex = 0;
+    private int cubeIndex = 1;
 
 
 
@@ -82,23 +81,23 @@ public class CubeActivity extends Activity {
         v0Z = ((cubeDataList.get(index)[z1Index]/baseNum)-coreZ)*multi;
 
         v1X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
-        v1Y = ((cubeDataList.get(index)[y2Index]-cubeDataList.get(index)[hIndex])/baseNum - coreY)*multi;
-        v1Z = ((cubeDataList.get(index)[z2Index]- cubeDataList.get(index)[dIndex])/baseNum - coreZ)*multi;
+        v1Y = ((cubeDataList.get(index)[y1Index])/baseNum - coreY)*multi;
+        v1Z = ((cubeDataList.get(index)[z1Index])/baseNum - coreZ)*multi;
 
         v2X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
         v2Y = ((cubeDataList.get(index)[y2Index])/baseNum - coreY)*multi;
-        v2Z = ((cubeDataList.get(index)[z2Index]- cubeDataList.get(index)[dIndex])/baseNum - coreZ)*multi;
+        v2Z = ((cubeDataList.get(index)[z1Index])/baseNum - coreZ)*multi;
 
         v3X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
-        v3Y = ((cubeDataList.get(index)[y1Index] + cubeDataList.get(index)[hIndex])/baseNum-coreY)*multi;
+        v3Y = ((cubeDataList.get(index)[y2Index])/baseNum-coreY)*multi;
         v3Z = ((cubeDataList.get(index)[z1Index]/baseNum)-coreZ)*multi;
 
         v4X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
         v4Y = ((cubeDataList.get(index)[y1Index] )/baseNum-coreY)*multi;
-        v4Z = ((cubeDataList.get(index)[z1Index] +  cubeDataList.get(index)[dIndex])/baseNum-coreZ)*multi;
+        v4Z = ((cubeDataList.get(index)[z2Index] )/baseNum-coreZ)*multi;
 
         v5X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
-        v5Y = ((cubeDataList.get(index)[y2Index]-cubeDataList.get(index)[hIndex])/baseNum - coreY)*multi;
+        v5Y = ((cubeDataList.get(index)[y1Index])/baseNum - coreY)*multi;
         v5Z = (cubeDataList.get(index)[z2Index]/baseNum - coreZ)*multi;
 
         v6X = (cubeDataList.get(index)[x2Index]/baseNum -coreX)*multi;
@@ -106,8 +105,8 @@ public class CubeActivity extends Activity {
         v6Z = (cubeDataList.get(index)[z2Index]/baseNum - coreZ)*multi;
 
         v7X = ((cubeDataList.get(index)[x1Index]/baseNum)-coreX)*multi;
-        v7Y = ((cubeDataList.get(index)[y1Index] +  cubeDataList.get(index)[hIndex])/baseNum-coreY)*multi;
-        v7Z = ((cubeDataList.get(index)[z1Index] +  cubeDataList.get(index)[dIndex])/baseNum-coreZ)*multi;
+        v7Y = ((cubeDataList.get(index)[y2Index])/baseNum-coreY)*multi;
+        v7Z = ((cubeDataList.get(index)[z2Index])/baseNum-coreZ)*multi;
 
         float vertices[] = {
                 v0X, v0Y, v0Z,
@@ -155,10 +154,6 @@ public class CubeActivity extends Activity {
         }
     }
 
-
-
-
-
     private void bindCubeService(){
         Intent intentService =  new Intent();
         intentService.setClassName(this,"com.example.denjamin.spinningcube.InnerCubeService");
@@ -187,8 +182,7 @@ public class CubeActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-//        GLSurfaceView view = new GLSurfaceView(this);
+        GLSurfaceView view = new GLSurfaceView(this);
         try {
             setCubeDataList();
 //            setVerticles(cubeIndex);
@@ -200,69 +194,42 @@ public class CubeActivity extends Activity {
     }
 
     @Override
-    public void onResume() {
+    public boolean dispatchKeyEvent(KeyEvent event) {
         GLSurfaceView view = new GLSurfaceView(this);
-        try {
-//            setCubeDataList();
-            setVerticles(cubeIndex);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-        setContentView(view);
-
-
-        super.onResume();
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.open_gldemo, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.next:
-//                cubeIndex ++;
-//                return true;
-//            case R.id.prev:
-//                cubeIndex--;
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+        int keyCode = event.getKeyCode();
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && cubeIndex < cubeDataList.size() -1) {
             cubeIndex ++;
-            GLSurfaceView view = new GLSurfaceView(this);
+//            GLSurfaceView view = new GLSurfaceView(this);
+//            for(int i = 0; i < cubeIndex; i++) {
             try {
-//            setCubeDataList();
+//                setCubeDataList();
                 setVerticles(cubeIndex);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-            setContentView(view);
+//                setContentView(view);
+
+            addContentView(view,params);
+//            }
+//            return true;
         }
-        if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && cubeIndex > 0) {
             cubeIndex --;
-            GLSurfaceView view = new GLSurfaceView(this);
+//            GLSurfaceView view = new GLSurfaceView(this);
             try {
-//            setCubeDataList();
+//                setCubeDataList();
                 setVerticles(cubeIndex);
             }catch (Exception e){
                 e.printStackTrace();
             }
             view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-            setContentView(view);
+//            setContentView(view);
+            addContentView(view,params);
+//            return true;
         }
-
-        return super.onKeyDown(keyCode, event);
+        return super.dispatchKeyEvent(event);
     }
-
 }
