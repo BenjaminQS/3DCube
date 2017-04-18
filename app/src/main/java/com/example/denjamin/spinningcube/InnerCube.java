@@ -14,23 +14,6 @@ public class InnerCube  {
     private FloatBuffer mColorBuffer;
     private ByteBuffer  mIndexBuffer;
 
-//    public InnerCube(FloatBuffer mVertexBuffer, FloatBuffer mColorBuffer,ByteBuffer  mIndexBuffer ){
-//        this.mVertexBuffer = mVertexBuffer;
-//        this.mColorBuffer = mColorBuffer;
-//        this.mIndexBuffer = mIndexBuffer;
-//    }
-
-
-//    private float vertices[] = {
-//            -0.5f, -0.5f, -0.5f,
-//            0.5f, -0.5f, -0.5f,
-//            0.5f,  0.5f, -0.5f,
-//            -0.5f, 0.5f, -0.5f,
-//            -0.5f, -0.5f,  0.5f,
-//            0.5f, -0.5f,  0.5f,
-//            0.5f,  0.5f,  0.5f,
-//            -0.5f,  0.5f,  0.5f
-//    };
     private float colors[] = {
             1.0f,  0.0f,  0.0f,  0.0f,
             1.0f,  0.0f,  0.0f,  0.0f,
@@ -52,10 +35,7 @@ public class InnerCube  {
     };
 
     public InnerCube(FloatBuffer mVertexBuffer) {
-//        ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
-//        byteBuf.order(ByteOrder.nativeOrder());
-//        mVertexBuffer = byteBuf.asFloatBuffer();
-//        mVertexBuffer.put(vertices);
+
         this.mVertexBuffer = mVertexBuffer;
         this.mVertexBuffer.position(0);
 
@@ -63,21 +43,15 @@ public class InnerCube  {
         byteBuf.order(ByteOrder.nativeOrder());
         mColorBuffer = byteBuf.asFloatBuffer();
         mColorBuffer.put(colors);
-//        this.mColorBuffer = mColorBuffer;
         this.mColorBuffer.position(0);
 
         mIndexBuffer = ByteBuffer.allocateDirect(indices.length);
         mIndexBuffer.put(indices);
-//        this.mIndexBuffer = mIndexBuffer;
         this.mIndexBuffer.position(0);
     }
 
     public void draw(GL10 gl) {
         gl.glFrontFace(GL10.GL_CW);
-
-//        glEnable(GL_BLEND);
-//        GLES10.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mVertexBuffer);
         gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
 

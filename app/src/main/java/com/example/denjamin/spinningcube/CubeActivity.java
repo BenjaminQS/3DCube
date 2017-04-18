@@ -169,7 +169,6 @@ public class CubeActivity extends Activity {
             }
             @Override
             public void onServiceDisconnected(ComponentName name) {
-
             }
         };
         bindService(intentService, conn, Context.BIND_AUTO_CREATE);
@@ -185,12 +184,12 @@ public class CubeActivity extends Activity {
         GLSurfaceView view = new GLSurfaceView(this);
         try {
             setCubeDataList();
-//            setVerticles(cubeIndex);
+            setVerticles(cubeIndex);
         }catch (Exception e){
             e.printStackTrace();
         }
-//        view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-//        setContentView(view);
+        view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
+        setContentView(view);
     }
 
     @Override
@@ -210,11 +209,7 @@ public class CubeActivity extends Activity {
                 e.printStackTrace();
             }
             view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-//                setContentView(view);
-
-            addContentView(view,params);
-//            }
-//            return true;
+                setContentView(view);
         }
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && cubeIndex > 0) {
             cubeIndex --;
@@ -226,9 +221,7 @@ public class CubeActivity extends Activity {
                 e.printStackTrace();
             }
             view.setRenderer(new CubeRenderer(new InnerCube(vertexBuffer)));
-//            setContentView(view);
-            addContentView(view,params);
-//            return true;
+            setContentView(view);
         }
         return super.dispatchKeyEvent(event);
     }

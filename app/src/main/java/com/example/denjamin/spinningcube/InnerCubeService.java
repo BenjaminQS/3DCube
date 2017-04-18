@@ -88,35 +88,6 @@ public class InnerCubeService extends Service {
                     if (packingData == null || !packingData.equals(packingDataTemp)) {
                         packingData = getPackingData("http://192.168.0.104:8080/ServletJson0120/ServletJson0120/JsonTest");
                     }
-
-//                    if (packingData != null) {
-//                        if(!packingData.equals(packingDataTemp)) {
-//                            cubeList.clear();
-//                            //cubeAarryList.clear();
-//                            //boxIdList.clear();
-//                            InnerCubeBean innerBean = new InnerCubeBean();
-//                            JSONArray jsonArray = new JSONArray(packingData);
-//
-//                            System.out.println("jsonArray.length:" + jsonArray.length());
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                int[] cubeStringData = new int[9];
-//                                JSONObject jObject = jsonArray.getJSONObject(i);
-//                                cubeStringData[0] = jObject.getInt("w");
-//                                cubeStringData[1] = jObject.getInt("h");
-//                                cubeStringData[2] = jObject.getInt("d");
-//                                JSONObject coordJObject = jObject.getJSONObject("coordinates");
-//                                cubeStringData[3] = (coordJObject.getInt("x1"));
-//                                cubeStringData[4] = (coordJObject.getInt("y1"));
-//                                cubeStringData[5] = (coordJObject.getInt("z1"));
-//                                cubeStringData[6] = (coordJObject.getInt("x2"));
-//                                cubeStringData[7] = (coordJObject.getInt("y2"));
-//                                cubeStringData[8] = (coordJObject.getInt("z2"));
-//                                cubeList.add(cubeStringData);
-//                                totalSteps = i;
-//                            }
-//                        }
-//                    }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
